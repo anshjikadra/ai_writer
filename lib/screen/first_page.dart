@@ -164,18 +164,6 @@ class _f_pageState extends State<f_page> {
 
 List<String> list = [
   "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
-  "",
 ];
 
 StreamGet streamGet = StreamGet();

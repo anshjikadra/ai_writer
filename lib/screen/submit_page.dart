@@ -24,12 +24,19 @@ class _submit_pageState extends State<submit_page> {
           child: Column(
 
             children: [
-              Row(
-                children: [
-                  GestureDetector(onTap: () {
-                  },child: Icon(Icons.arrow_back_ios,color: Color(0xFF077A37),size: 20,)),
-                  Align(alignment: Alignment.topLeft,child: Text("Back",style: TextStyle(color:Color(0xFF077A37),fontSize: 20),)),
-                ],
+              GestureDetector(
+                onTap: () {
+
+                  Navigator.pop(context);
+                },
+                child: Row(
+
+                  children: [
+
+                    Icon(Icons.arrow_back_ios,color: Color(0xFF077A37),size: 20,),
+                    Align(alignment: Alignment.topLeft,child: Text("Back",style: TextStyle(color:Color(0xFF077A37),fontSize: 20),)),
+                  ],
+                ),
               ),
               SizedBox(
                 height: 20,
@@ -44,11 +51,10 @@ class _submit_pageState extends State<submit_page> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.vertical,
                         child: Column(
-
-
-
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Align(alignment: Alignment.topLeft,child: Text("Question: ${widget.question}",style: TextStyle(fontSize: 18))),
+                            Text("Question: ${widget.question}",style: TextStyle(fontSize: 18)),
                             SizedBox(height: 15,),
                             Text("Answer: ${widget.answer}",style: TextStyle(fontSize: 18)),
                           ],
