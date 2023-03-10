@@ -24,7 +24,7 @@ class _setiing_pageState extends State<setiing_page> {
               Text(
                 "AI Write",
                 style: TextStyle(
-                    color: Colors.green,
+                    color: Color(0xFF077A37),
                     fontSize: 20,
                     fontWeight: FontWeight.bold),
               ),
@@ -38,7 +38,7 @@ class _setiing_pageState extends State<setiing_page> {
                    crossAxisAlignment: CrossAxisAlignment.center,
 
                     children: [
-                      Align(alignment: Alignment.topLeft,child: Text("AI Write",style: TextStyle(fontSize: 20,color: Colors.green,fontWeight: FontWeight.bold),)),
+                      Align(alignment: Alignment.topLeft,child: Text("AI Write",style: TextStyle(fontSize: 20,color: Color(0xFF077A37),fontWeight: FontWeight.bold),)),
                       Align(alignment: Alignment.topLeft,child: Text("Version 1.0",style: TextStyle(fontSize: 18,color: Colors.grey),)),
                     ],
                   ),

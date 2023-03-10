@@ -1,6 +1,7 @@
 import 'package:ai_writer/screen/first_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share_plus/share_plus.dart';
 
@@ -44,12 +45,12 @@ class _submit_pageState extends State<submit_page> {
                         scrollDirection: Axis.vertical,
                         child: Column(
 
-                          crossAxisAlignment: CrossAxisAlignment.start,
+
 
                           children: [
-                            Text("Question: ${widget.question}",style: TextStyle(fontSize: 18)),
+                            Align(alignment: Alignment.topLeft,child: Text("Question: ${widget.question}",style: TextStyle(fontSize: 18))),
                             SizedBox(height: 15,),
-                            Text("Answer:${widget.answer}",style: TextStyle(fontSize: 18)),
+                            Text("Answer: ${widget.answer}",style: TextStyle(fontSize: 18)),
                           ],
                         ),
                       ),

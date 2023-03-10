@@ -115,7 +115,7 @@ class _f_pageState extends State<f_page> {
 
                       },
                       child: DottedBorder(
-                        dashPattern: [8, 4],
+                        // dashPattern: [8, 4],
                         child: Container(
                             height: 300,
                             width: 250,
