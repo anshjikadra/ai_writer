@@ -1,12 +1,17 @@
 import 'dart:async';
 
+import 'package:ai_writer/dataBase/history_db_model.dart';
 import 'package:ai_writer/screen/setting_page.dart';
 import 'package:ai_writer/screen/submit_page.dart';
 import 'package:ai_writer/screen/write_page.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 
+import '../dataBase/history_data_file.dart';
+
 int selectIndex=0;
+
+
 
 
 
@@ -26,6 +31,27 @@ class _first_pageState extends State<first_page> {
     setState(() {
       selectIndex=index;
       print(selectIndex);
+    });
+  }
+
+
+  @override
+  void initState() {
+    super.initState();
+    get_data();
+  }
+
+  get_data()
+  async{
+    s_history=await DB.gethistory();
+    for(var e in s_history)
+      {
+        print("questiom:${e.question_data}");
+        print("ans:${e.ans_data}");
+        print("timw:${e.current_time}");
+      }
+    setState(() {
+
     });
   }
 
@@ -117,7 +143,7 @@ class _f_pageState extends State<f_page> {
                       child: DottedBorder(
                         // dashPattern: [8, 4],
                         child: Container(
-                            height: 300,
+                            height: 500,
                             width: 250,
                             decoration: BoxDecoration(
                               //border: Border.all(style:BorderStyle. ,color: Colors.black),
@@ -139,13 +165,37 @@ class _f_pageState extends State<f_page> {
                             )),
                       ),
                     ),
-                    for (var e in list)
-                      Container(
-                        height: 300,
-                        width: 250,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.white,
+                    for (var e in s_history)
+
+                      GestureDetector(
+                       onTap: () {
+                         Navigator.push(context, MaterialPageRoute(builder: (context) {
+                           return submit_page(question:  e.question_data,answer: e.ans_data,);
+                         },));
+                       },
+                        child: Container(
+                          height: 500,
+                          width: 250,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.white,
+                          ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+
+                                children: [
+                                  Flexible(child: Text("${e.question_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15,fontWeight: FontWeight.bold,),maxLines: 1,)),
+
+                                  Text("${e.ans_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15),maxLines:6),
+                                  Spacer(),
+                                  Text("${e.current_time}",style:  TextStyle(fontSize: 15),)
+                                ],
+                              ),
+                            )
                         ),
                       ),
                   ],
@@ -162,9 +212,9 @@ class _f_pageState extends State<f_page> {
 }
 
 
-List<String> list = [
-  "",
-];
+// List<String> list = [
+//   "",
+// ];
 
 StreamGet streamGet = StreamGet();
 

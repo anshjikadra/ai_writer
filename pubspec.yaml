@@ -39,6 +39,8 @@ dependencies:
   fluttertoast:
   clipboard:
   share_plus:
+  sqflite:
+  path_provider:
 
 dev_dependencies:
   flutter_test:

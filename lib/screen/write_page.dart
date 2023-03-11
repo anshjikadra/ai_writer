@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:ai_writer/dataBase/history_data_file.dart';
+import 'package:ai_writer/dataBase/history_db_model.dart';
 import 'package:ai_writer/screen/submit_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +11,13 @@ import 'first_page.dart';
 
 String basUrL = 'https://drawing-how-to-draw.com/chatgpt/api/chat_gpt';
 
+
+
+
+
 class write_page extends StatefulWidget {
+
+
   const write_page({Key? key}) : super(key: key);
 
   @override
@@ -17,10 +25,18 @@ class write_page extends StatefulWidget {
 }
 
 class _write_pageState extends State<write_page> {
+
   double sliderValOne = 0;
   double sliderValTwo = 0;
   TextEditingController myText = TextEditingController();
   bool isLoding = false;
+   DateTime dt =DateTime.now();
+  // String time= "${dt.day}-${dt.month}-${dt.hour}:${dt.minute}";
+  
+
+
+
+
 
   Future call_api() async {
     setState(() {
@@ -47,6 +63,10 @@ class _write_pageState extends State<write_page> {
       final jsonResponse = jsonDecode(await response.stream.bytesToString());
       print("==========login $jsonResponse========");
       print("=========${jsonResponse['ans']}========");
+
+      String date='${dt.day}-${dt.month} ${dt.hour}:${dt.minute}';
+      DB.save(H_data(question_data: myText.text,ans_data: jsonResponse['ans'],current_time: date));
+      setState(() {});
 
       Navigator.of(context).push(
         MaterialPageRoute(
@@ -111,6 +131,9 @@ class _write_pageState extends State<write_page> {
       print(response.reasonPhrase);
     }
   }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -315,6 +338,7 @@ class _write_pageState extends State<write_page> {
                   onTap: () {
 
                       call_api();
+
 
                   },
                   child: Container(

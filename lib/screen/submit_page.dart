@@ -1,4 +1,5 @@
 import 'package:ai_writer/screen/first_page.dart';
+import 'package:ai_writer/screen/write_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -6,18 +7,20 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:share_plus/share_plus.dart';
 
 class submit_page extends StatefulWidget {
+
   String question,answer;
   submit_page({required this.question,required this.answer});
 
   @override
   State<submit_page> createState() => _submit_pageState();
+
 }
 
 class _submit_pageState extends State<submit_page> {
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(15.0),
@@ -27,7 +30,9 @@ class _submit_pageState extends State<submit_page> {
               GestureDetector(
                 onTap: () {
 
-                  Navigator.pop(context);
+                 Navigator.pushAndRemoveUntil(context,MaterialPageRoute(builder: (context) {
+                   return first_page();
+                 },), (route) => false);
                 },
                 child: Row(
 
