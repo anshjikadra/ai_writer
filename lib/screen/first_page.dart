@@ -44,12 +44,14 @@ class _first_pageState extends State<first_page> {
   get_data()
   async{
     s_history=await DB.gethistory();
-    for(var e in s_history)
-      {
-        print("questiom:${e.question_data}");
-        print("ans:${e.ans_data}");
-        print("timw:${e.current_time}");
-      }
+    stor_history=List.from(s_history.reversed);
+
+    // for(var e in s_history)
+    //   {
+    //     print("questiom:${e.question_data}");
+    //     print("ans:${e.ans_data}");
+    //     print("timw:${e.current_time}");
+    //   }
     setState(() {
 
     });
@@ -132,6 +134,7 @@ class _f_pageState extends State<f_page> {
             ),
             Flexible(
               child: GridView(
+
                   children: [
                     GestureDetector(
                       onTap: () {
@@ -165,7 +168,7 @@ class _f_pageState extends State<f_page> {
                             )),
                       ),
                     ),
-                    for (var e in s_history)
+                    for (var e in stor_history)
 
                       GestureDetector(
                        onTap: () {
@@ -185,14 +188,14 @@ class _f_pageState extends State<f_page> {
                               child: Column(
 
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                 mainAxisAlignment: MainAxisAlignment.start,
 
                                 children: [
                                   Flexible(child: Text("${e.question_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15,fontWeight: FontWeight.bold,),maxLines: 1,)),
-
-                                  Text("${e.ans_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15),maxLines:6),
+                                  SizedBox(height: 5,),
+                                  Text("${e.ans_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15),maxLines:8),
                                   Spacer(),
-                                  Text("${e.current_time}",style:  TextStyle(fontSize: 15),)
+                                  Text("${e.current_time}",style:  TextStyle(fontSize: 15),textAlign: TextAlign.end,)
                                 ],
                               ),
                             )
@@ -202,7 +205,7 @@ class _f_pageState extends State<f_page> {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       mainAxisSpacing: 10,
-                      crossAxisSpacing: 20)),
+                      crossAxisSpacing: 20,childAspectRatio: 10/12)),
             ),
           ],
         ),

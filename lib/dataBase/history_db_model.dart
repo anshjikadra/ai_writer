@@ -2,6 +2,7 @@ import 'dart:convert';
 
 
 List<H_data> s_history=[];
+List<H_data> stor_history=[];
 class H_data {
 
   int? id;

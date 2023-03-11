@@ -65,14 +65,23 @@ class _write_pageState extends State<write_page> {
       print("=========${jsonResponse['ans']}========");
 
       String date='${dt.day}-${dt.month} ${dt.hour}:${dt.minute}';
-      DB.save(H_data(question_data: myText.text,ans_data: jsonResponse['ans'],current_time: date));
+
+      String ans=jsonResponse['ans'];
+      if (ans.startsWith("\n")){
+        ans = ans.substring(1, ans.length);
+        if (ans.startsWith("\n")){
+          ans = ans.substring(1, ans.length);
+        }
+      }
+
+      DB.save(H_data(question_data: myText.text,ans_data: ans,current_time: date));
       setState(() {});
 
       Navigator.of(context).push(
         MaterialPageRoute(
             builder: (context) => submit_page(
                   question: myText.text,
-                  answer: jsonResponse['ans'],
+                  answer: ans,
                 )),
       );
 
@@ -211,7 +220,7 @@ class _write_pageState extends State<write_page> {
                     children: [
                       Slider(
                           thumbColor: Color(0xFF077A37),
-                          activeColor: Color(0xFF077A37),
+                          activeColor: Color(0xFFf4f3fa),
                           inactiveColor: Color(0xFFf4f3fa),
                           min: 0,
                           max: 100,
@@ -279,7 +288,7 @@ class _write_pageState extends State<write_page> {
                     children: [
                       Slider(
                           thumbColor: Color(0xFF077A37),
-                          activeColor: Color(0xFF077A37),
+                          activeColor:  Color(0xFFf4f3fa),
                           inactiveColor: Color(0xFFf4f3fa),
                           divisions: 2,
                           min: 0,
