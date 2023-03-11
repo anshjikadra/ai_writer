@@ -146,8 +146,7 @@ class _f_pageState extends State<f_page> {
                       child: DottedBorder(
                         // dashPattern: [8, 4],
                         child: Container(
-                            height: 500,
-                            width: 250,
+                          constraints: BoxConstraints.expand(),
                             decoration: BoxDecoration(
                               //border: Border.all(style:BorderStyle. ,color: Colors.black),
                                 borderRadius: BorderRadius.circular(5),
@@ -156,7 +155,7 @@ class _f_pageState extends State<f_page> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Image.asset(
-                                  "image/docment.png",
+                                  "image/docment.png",fit: BoxFit.cover,
                                   height: 70,
                                 ),
                                 Text(
@@ -177,27 +176,24 @@ class _f_pageState extends State<f_page> {
                          },));
                        },
                         child: Container(
-                          height: 500,
-                          width: 250,
+                            padding: const EdgeInsets.all(5.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
                             color: Colors.white,
                           ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
+                            child: Column(
 
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                 mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.end,
 
-                                children: [
-                                  Flexible(child: Text("${e.question_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15,fontWeight: FontWeight.bold,),maxLines: 1,)),
-                                  SizedBox(height: 5,),
-                                  Text("${e.ans_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15),maxLines:8),
-                                  Spacer(),
-                                  Text("${e.current_time}",style:  TextStyle(fontSize: 15),textAlign: TextAlign.end,)
-                                ],
-                              ),
+                              children: [
+                                Text("${e.question_data}",style: TextStyle(overflow: TextOverflow.ellipsis,fontSize: 15,fontWeight: FontWeight.bold,),maxLines: 1,),
+                                SizedBox(height: 5,),
+                                Flexible(fit: FlexFit.tight,child: Text("${e.ans_data}",style: TextStyle(fontSize: 15),overflow: TextOverflow.ellipsis,maxLines: 8,)),
+
+                                Text("${e.current_time}",style:  TextStyle(fontSize: 15,color: Colors.black,)),
+
+                              ],
                             )
                         ),
                       ),

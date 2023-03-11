@@ -6,6 +6,7 @@ import 'package:ai_writer/screen/submit_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 import 'first_page.dart';
 
@@ -13,7 +14,7 @@ String basUrL = 'https://drawing-how-to-draw.com/chatgpt/api/chat_gpt';
 
 
 
-
+DateTime dt = DateTime.now();
 
 class write_page extends StatefulWidget {
 
@@ -30,9 +31,12 @@ class _write_pageState extends State<write_page> {
   double sliderValTwo = 0;
   TextEditingController myText = TextEditingController();
   bool isLoding = false;
-   DateTime dt =DateTime.now();
+
+
   // String time= "${dt.day}-${dt.month}-${dt.hour}:${dt.minute}";
-  
+
+
+  int word=200;
 
 
 
@@ -64,7 +68,8 @@ class _write_pageState extends State<write_page> {
       print("==========login $jsonResponse========");
       print("=========${jsonResponse['ans']}========");
 
-      String date='${dt.day}-${dt.month} ${dt.hour}:${dt.minute}';
+      // String date='${dt.day}-${dt.month} ${dt.hour}:${dt.minute}';
+      String formattedDate = DateFormat('dd-MM HH:MM').format(dt);
 
       String ans=jsonResponse['ans'];
       if (ans.startsWith("\n")){
@@ -74,7 +79,7 @@ class _write_pageState extends State<write_page> {
         }
       }
 
-      DB.save(H_data(question_data: myText.text,ans_data: ans,current_time: date));
+      DB.save(H_data(question_data: myText.text,ans_data: ans,current_time: formattedDate));
       setState(() {});
 
       Navigator.of(context).push(
@@ -228,6 +233,19 @@ class _write_pageState extends State<write_page> {
                           onChanged: (value) {
                             setState(() {
                               sliderValOne = value;
+                              print("Slidewrvalueone::${sliderValOne}");
+                              if(sliderValOne==50)
+                                {
+                                  word=500;
+                                }
+                              if(sliderValOne==100)
+                                {
+                                  word=1000;
+                                }
+                              if(sliderValOne==0)
+                                {
+                                  word=200;
+                                }
                             });
                           },
                           value: sliderValOne),
@@ -263,7 +281,7 @@ class _write_pageState extends State<write_page> {
                 Align(
                     alignment: Alignment.bottomRight,
                     child: Text(
-                      "up to 200 word",
+                      "up to ${word} word",
                       style: TextStyle(color: Colors.grey),
                     )),
                 SizedBox(
@@ -296,6 +314,7 @@ class _write_pageState extends State<write_page> {
                           onChanged: (value) {
                             setState(() {
                               sliderValTwo = value;
+                              print("Slidewrvaluetwo::${sliderValTwo}");
                             });
                           },
                           value: sliderValTwo),
